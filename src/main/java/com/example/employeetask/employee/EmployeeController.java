@@ -19,7 +19,9 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<?> saveEmployee(@RequestBody Employee employee){
-        employeeService.addEmployee(employee);
+        if(employeeService.addEmployee(employee).isEmpty())
+            return ResponseEntity.badRequest().build();
+
         return ResponseEntity.ok().build();
     }
 

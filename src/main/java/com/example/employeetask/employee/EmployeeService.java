@@ -14,8 +14,10 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public Employee addEmployee(Employee employee){
-        return employeeRepository.insert(employee);
+    public Optional<Employee> addEmployee(Employee employee){
+        if(employee.getFirstName()==null || employee.getLastName()==null || employee.getJobTitle()==null || employee.getDepartmentId()==null)
+            return Optional.empty();
+        return Optional.of(employeeRepository.insert(employee));
     }
 
     public List<Employee> getAllEmployees(){
