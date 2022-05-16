@@ -18,19 +18,19 @@ public class EmployeeController {
     }
 
     @PostMapping
-    ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
+    public ResponseEntity<?> saveEmployee(@RequestBody Employee employee){
         employeeService.addEmployee(employee);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    ResponseEntity<List<Employee>> getAllEmployees(){
+    public ResponseEntity<List<Employee>> getAllEmployees(){
         List<Employee> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id){
         Optional<Employee> employee = employeeService.getEmployeeById(id);
         if(employee.isEmpty()){
             return ResponseEntity.notFound().build();
@@ -40,9 +40,17 @@ public class EmployeeController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Employee> updateEmployeeById(@PathVariable Long id, @RequestBody Employee employee){
+    public ResponseEntity<?> replaceEmployeeById(@PathVariable Long id, @RequestBody Employee employee){
         employeeService.replaceEmployee(id, employee);
         return ResponseEntity.ok().build();
+    }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateEmployeeDetailsById(@PathVariable Long id, @RequestBody Employee employee){
+        Optional<Employee> updatedEmployee = employeeService.updateEmployee(id, employee);
+        if(updatedEmployee.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
     }
 }

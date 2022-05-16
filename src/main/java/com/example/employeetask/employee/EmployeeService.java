@@ -14,15 +14,15 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    Employee addEmployee(Employee employee){
+    public Employee addEmployee(Employee employee){
         return employeeRepository.insert(employee);
     }
 
-    List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees(){
         return employeeRepository.loadAllEmployees();
     }
 
-    Optional<Employee> getEmployeeById(Long id){
+    public Optional<Employee> getEmployeeById(Long id){
         Employee employee = employeeRepository.loadEmployeeById(id);
         if(employee == null){
             return Optional.empty();
@@ -30,11 +30,39 @@ public class EmployeeService {
         return Optional.of(employee);
     }
 
-    void replaceEmployee(Long id, Employee employee) {
-        if(employeeRepository.loadEmployeeById(id)==null){
+    public void replaceEmployee(Long id, Employee employee) {
+        if(employeeRepository.loadEmployeeById(id) == null){
             employeeRepository.insert(employee);
         } else{
             employeeRepository.update(id, employee);
         }
+    }
+
+    public Optional<Employee> updateEmployee(Long id, Employee employee){
+        Employee employeeToUpdate = employeeRepository.loadEmployeeById(id);
+        if(employeeToUpdate == null){
+            return Optional.empty();
+        }
+
+        if(employee.getDepartmentId() != null){
+            employeeToUpdate.setDepartmentId(employee.getDepartmentId());
+        }
+
+        if(employee.getLastName() != null){
+            employeeToUpdate.setLastName(employee.getLastName());
+        }
+
+        if(employee.getFirstName() != null){
+            employeeToUpdate.setFirstName(employee.getFirstName());
+        }
+
+        if(employee.getJobTitle() != null){
+            employeeToUpdate.setJobTitle(employee.getJobTitle());
+        }
+
+        employeeToUpdate.setId(id);
+        employeeRepository.update(id, employeeToUpdate);
+        return Optional.of(employeeToUpdate);
+
     }
 }
