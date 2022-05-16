@@ -63,6 +63,9 @@ public class EmployeeService {
         employeeToUpdate.setId(id);
         employeeRepository.update(id, employeeToUpdate);
         return Optional.of(employeeToUpdate);
+    }
 
+    public void deleteById(Long id){
+        employeeRepository.deleteById(id);
     }
 }

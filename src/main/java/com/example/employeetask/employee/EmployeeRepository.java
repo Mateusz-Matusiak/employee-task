@@ -85,5 +85,11 @@ public class EmployeeRepository extends JdbcDaoSupport {
         jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getJobTitle(), employee.getDepartmentId(), id);
     }
 
+    public void deleteById(Long id){
+        String sql = "DELETE FROM employee WHERE employee_id = ?";
+
+        jdbcTemplate.update(sql, id);
+    }
+
 
 }
