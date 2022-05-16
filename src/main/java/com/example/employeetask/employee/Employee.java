@@ -12,16 +12,16 @@ public class Employee {
 
     private String firstName;
     private String lastName;
-    private Long department_id;
-    private String job_title;
+    private Long departmentId;
+    private String jobTitle;
 
     public Employee() {}
 
-    public Employee(String firstName, String lastName, Long department_id, String job_title) {
+    public Employee(String firstName, String lastName, Long departmentId, String job_title) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.department_id = department_id;
-        this.job_title = job_title;
+        this.departmentId = departmentId;
+        this.jobTitle = job_title;
     }
 
     public Long getId() {
@@ -48,20 +48,20 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Long getDepartment_id() {
-        return department_id;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment_id(Long department_id) {
-        this.department_id = department_id;
+    public void setDepartmentId(Long department_id) {
+        this.departmentId = department_id;
     }
 
-    public String getJob_title() {
-        return job_title;
+    public String getJobTitle() {
+        return jobTitle;
     }
 
-    public void setJob_title(String job_title) {
-        this.job_title = job_title;
+    public void setJobTitle(String job_title) {
+        this.jobTitle = job_title;
     }
 
     @Override
@@ -70,8 +70,8 @@ public class Employee {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", department_id=" + department_id +
-                ", job_title='" + job_title + '\'' +
+                ", department_id=" + departmentId +
+                ", job_title='" + jobTitle + '\'' +
                 '}';
     }
 }
